@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Floating-Base Deep Lagrangian Networks">
+  <meta name="keywords" content="FeLaN">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FeLaN</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/Robot_arm_icon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">Floating-Base Deep Lagrangian Networks</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://www.ias.informatik.tu-darmstadt.de/Team/LucasSchulze">Lucas Schulze</a><sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="https://www.linkedin.com/in/julianodnegri">Juliano Decico Negri</a><sup>2</sup>,</span>
+            <span class="author-block">
+              <a href="https://dls.iit.it/people-details/-/people/victor-barasuol">Victor Barasuol</a><sup>3</sup>,</span>
+            <span class="author-block">
+              <a href="https://www.linkedin.com/in/viviansuzano">Vivian Suzano Medeiros</a><sup>2</sup>,</span>
+            <span class="author-block">
+              <a href="https://www.linkedin.com/in/marcelo-becker-761bb524">Marcelo Becker</a><sup>2</sup>,</span>
+            <span class="author-block">
+              <a href="https://www.ias.informatik.tu-darmstadt.de/Team/JanPeters">Jan Peters</a><sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="https://www.ias.informatik.tu-darmstadt.de/Team/OlegArenz">Oleg Arenz</a><sup>1</sup>
+            </span>
+          </div>
+
+          <div class="is-size-6 publication-authors">
+            <span class="author-block"><sup>1</sup>Intelligent Autonomous Systems Lab, TU Darmstadt, Germany</span><br>
+            <span class="author-block"><sup>2</sup>Mobile Robotics Group, University of São Paulo (EESC-USP), Brazil</span><br>
+            <span class="author-block"><sup>3</sup>Dynamic Legged Systems Lab, Istituto Italiano di Tecnologia (IIT), Italy</span>
+          </div>
+
+          <div class="publication-authors mt-4" style="font-size: 1.05rem;">
+            <p class="has-text-weight-semibold">Accepted to the 2026 IEEE International Conference on Robotics & Automation (ICRA 2026)</p>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://arxiv.org/pdf/2510.17270"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2510.17270"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+
+          </div>
+        </div>
+
+        <div class="is-size-4 column has-text-centered">
+          <p class="is-size-4 has-text-weight-bold has-text-danger">
+          Code and datasets available soon!
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+    </div>
+  </div>
+</section>
+
+
+<!-- Method. -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-4">Method</h2>
+        <div class="content has-text-justified">
+          <p>Floating-Base systems (humanoids and quadrupeds) have specific dynamics properties that are typically not modeled in current grey-box methods: </p>
+          <ul>
+            <li>Base is not fixed -> its dynamics needs to be considered</li>
+            <li>Multiple kinematic branchs (leg, arms, head) -> decoupling and branch-induced sparsity</li>
+          </ul>
+          <p>These properties are structural constraints that show up directly in the robot's generalized inertia matrix.</p>
+          <p>For example, consider the inertia matrix of the Unitree Go2 quadruped robot:</p>
+
+          <!-- Go2 Inertia -->
+          <div class="mb-5" style="text-align: center;">
+            <img src="static/images/go2_inertia.gif" alt="FeLaN Architecture" style="max-width: 100%; height: auto;">
+          </div>
+
+          <p>A common way to learn a physically valid inertia matrix is to predict a Cholesky factor to guarantees positive definiteness.</p>
+          <p>However, standard Cholesky factorization does not preserve sparsity patterns: even if the original matrix is sparse, the resulting factor is generally dense. This not only compromises sparsity for a learning-based model, but also prevents the proper decoupling between kinematic branches.</p>
+
+          <!-- Image -->
+          <div class="mb-5" style="text-align: center;">
+            <img src="static/images/default_cholesky.png" alt="Default Cholesky" style="max-width: 100%; height: auto;">
+          </div>
+
+          <!-- Image -->
+          <p>Featherstone (2005) proposed an efficient factorization of the joint-space inertia matrix that exploits the branch-induced sparsity:</p>
+          <div class="mb-5" style="text-align: center;">
+            <img src="static/images/reordered_cholesky.png" alt="Reordered Cholesky" style="max-width: 100%; height: auto;">
+          </div>
+          <p class="is-size-7 has-text-grey" id="ref-featherstone2005">
+             R. Featherstone, “Efficient factorization of the joint-space inertia matrix for branched kinematic trees,”
+            <em>The International Journal of Robotics Research</em>, vol. 24, no. 6, pp. 487-500, 2005.
+          </p>
+
+          <p>
+          Observing that any sparsity or structural property in L is inherited by H, we parameterize the block components of L to fulfill all physical constraints of the robot. We then introduce Floating-Base Deep Lagrangian Networks (FeLaN), which learn one MLP per kinematic chain and a separate MLP for the base, thereby preserving branch-induced sparsity and ensuring full physical consistency of the composite spatial inertia.
+          </p>
+
+          <div class="mb-5" style="text-align: center;">
+            <img src="static/images/felan_full_white_back.png" alt="FeLaN Architecture" style="max-width: 100%; height: auto;">
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!--/ Motivation. -->
+
+<!--/ Video. -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Overall Paper Overview</h2>
+        <div class="content has-text-justified">
+
+          <!-- Video 1 -->
+          <div class="publication-video mb-5" style="border-radius: 15px; overflow: hidden; background: #fff;">
+            <iframe 
+              src="https://www.youtube.com/embed/NTKULQ_GzUQ" 
+              frameborder="0" 
+              allow="autoplay; encrypted-media" 
+              allowfullscreen>
+            </iframe>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Load Lucide icons -->
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <!-- Centered Section Title -->
+    <h2 class="title has-text-centered">BibTeX</h2>
+
+    <p>If you find this work useful, please consider citing:</p>
+
+    <!-- BibTeX Block with Copy Button -->
+    <div style="position: relative;">
+      <button 
+        onclick="copyBibtex()" 
+        style="position: absolute; top: 0; right: 0; padding: 0.3em; background: none; border: none; cursor: pointer;"
+        aria-label="Copy BibTeX"
+      >
+        <i data-lucide="copy" style="width: 20px; height: 20px; color: #4a4a4a;"></i>
+      </button>
+
+      <pre><code id="bibtex-code">@misc{schulze2025felan,
+      title={Floating-Base Deep Lagrangian Networks}, 
+      author={Lucas Schulze and Juliano Decico Negri and Victor Barasuol and Vivian Suzano Medeiros and Marcelo Becker and Jan Peters and Oleg Arenz},
+      year={2025},
+      eprint={2510.17270},
+      archivePrefix={arXiv},
+      primaryClass={cs.RO},
+      url={https://arxiv.org/abs/2510.17270}, 
+}</code></pre>
+
+      <!-- Status Message (hidden by default) -->
+      <p id="copy-status" style="color: green; font-size: 0.9em; display: none; margin-top: 0.5em;">
+        Copied to clipboard ✓
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Clipboard Script -->
+<script>
+  // Activate Lucide icons
+  lucide.createIcons();
+
+  // Copy BibTeX handler
+  function copyBibtex() {
+    const code = document.getElementById("bibtex-code").innerText;
+    const status = document.getElementById("copy-status");
+
+    navigator.clipboard.writeText(code).then(() => {
+      status.textContent = "Copied to clipboard ✓";
+      status.style.color = "green";
+      status.style.display = "block";
+
+      setTimeout(() => {
+        status.style.display = "none";
+      }, 2000);
+    }).catch(() => {
+      status.textContent = "Failed to copy.";
+      status.style.color = "red";
+      status.style.display = "block";
+    });
+  }
+</script>
+
+
+
+<!-- Acknowledgment. -->
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Acknowledgment</h2>
+        <div class="content has-text-justified">
+          <p>
+            This project has been funded by the German Federal Ministry of Research, Technology and Space (BMFTR) - Project number 01IS23057B.
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+<!--/ Acknowledgment. -->
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            Website source adapted from <a
+              href="https://github.com/nerfies/nerfies.github.io">nerfies.github.io</a>. We appreciate the original authors' effort.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
