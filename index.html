@@ -18,7 +18,7 @@
   <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="./static/css/index.css">
-  <link rel="icon" href="./static/images/Robot_arm_icon.svg">
+  <link rel="icon" href="./static/images/quadruped_icon.png">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script defer src="./static/js/fontawesome.all.min.js"></script>
@@ -107,37 +107,92 @@
   </div>
 </section>
 
+<!-- Method. -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-4">Overview</h2>
+        <div class="content has-text-justified">
+          <p>We introduce Floating-Base Deep Lagrangian Networks (FeLaN): a grey-box method for physically consistent system identification of floating-base robots (e.g., humanoids, quadrupeds).</p>
+          <p>Contributions and highlights:</p>
+          <ul>
+           <li>Novel inertia matrix parametrization: preserves branch-induced sparsity and decoupling inherent to multiple kinematic chains, while ensuring full physical consistency of the composite spatial inertia.
+           <li>FeLaN: a deep learning model that combines Lagrangian mechanics with the proposed parametrization, achieving greater interpretability.</li>
+           <li>Evaluation: validated on four real robots (PAL Robotics TALOS, Boston Dynamics Spot, Spot + arm, IIT HyQReal2) and two simulated robots (PAL Robotics TALOS and Unitree Go2).</li>
+           <li>Full physical consistency of the Composite Spatial Inertia: a theoretical extension of the single rigid-body case.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- Method. -->
 <section class="section">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
-        <h2 class="title is-4">Method</h2>
+        <h2 class="title is-4">Inertia Matrix Structure</h2>
         <div class="content has-text-justified">
-          <p>Floating-Base systems (humanoids and quadrupeds) have specific dynamics properties that are typically not modeled in current grey-box methods: </p>
+          <p>Floating-Base systems have specific dynamics properties that are typically not modeled in current grey-box methods:</p>
           <ul>
-            <li>Base is not fixed -> its dynamics needs to be considered</li>
-            <li>Multiple kinematic branchs (leg, arms, head) -> decoupling and branch-induced sparsity</li>
+            <li>Base is not fixed → its dynamics needs to be considered</li>
+            <li>Multiple kinematic branchs (leg, arms, head) → functional decoupling and branch-induced sparsity</li>
           </ul>
           <p>These properties are structural constraints that show up directly in the robot's generalized inertia matrix.</p>
           <p>For example, consider the inertia matrix of the Unitree Go2 quadruped robot:</p>
-
           <!-- Go2 Inertia -->
           <div class="mb-5" style="text-align: center;">
-            <img src="static/images/go2_inertia.gif" alt="FeLaN Architecture" style="max-width: 100%; height: auto;">
+            <img src="static/images/go2_inertia_small.png" alt="FeLaN Architecture" style="max-width: 100%; height: auto;">
           </div>
 
-          <p>A common way to learn a physically valid inertia matrix is to predict a Cholesky factor to guarantees positive definiteness.</p>
-          <p>However, standard Cholesky factorization does not preserve sparsity patterns: even if the original matrix is sparse, the resulting factor is generally dense. This not only compromises sparsity for a learning-based model, but also prevents the proper decoupling between kinematic branches.</p>
+          The top-left 6x6 block corresponds to the composite spatial inertia matrix and has three properties:
+          <ul>
+            <li>Stationary total mass</li>
+            <li>A skew-symmetric matrix capturing the coupling between linear and angular coordinates through the first mass moment</li>
+            <li>A positive definite composite rotational inertia, whose eigenvalues satisfy a triangle inequality</li>
+          </ul>
+          <!-- Go2 Inertia Composite Spatial Inertia -->
+          <div class="mb-5" style="text-align: center;">
+            <img src="static/images/go2_inertia_composite_inertia_mat_small.png" alt="Inertia Sparsity" style="max-width: 100%; height: auto;">
+          </div>
+
+          Notice the zeros in each leg's rows, reflecting the partial decoupling between legs.
+          <!-- Go2 Inertia Sparsity -->
+          <div class="mb-5" style="text-align: center;">
+            <img src="static/images/go2_inertia_sparsity.png" alt="Inertia Sparsity" style="max-width: 100%; height: auto;">
+          </div>
+
+          Additionally, each leg's row depends only on its own joint configuration.
+          <!-- Go2 Inertia functional -->
+          <div class="mb-5" style="text-align: center;">
+            <img src="static/images/go2_inertia_functional.png" alt="Inertia Functional" style="max-width: 100%; height: auto;">
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-4">Proposed Parametrization</h2>
+        <div class="content has-text-justified">
+
+          <p>A common way to learn a physically valid inertia matrix is to predict a Cholesky factor to guarantees positive definiteness:</p>
 
           <!-- Image -->
           <div class="mb-5" style="text-align: center;">
             <img src="static/images/default_cholesky.png" alt="Default Cholesky" style="max-width: 100%; height: auto;">
           </div>
+          <p>However, standard Cholesky factorization does not preserve sparsity patterns: even if the original matrix is sparse, the resulting factor is generally dense. This not only compromises sparsity for a learning-based model, but also prevents the proper decoupling between kinematic branches.</p>
 
           <!-- Image -->
-          <p>Featherstone (2005) proposed an efficient factorization of the joint-space inertia matrix that exploits the branch-induced sparsity:</p>
+          <p>Featherstone (2005) proposed an efficient factorization of the joint-space inertia matrix using a reordered Cholesky factorization, thereby exploiting branch-induced sparsity:</p>
           <div class="mb-5" style="text-align: center;">
             <img src="static/images/reordered_cholesky.png" alt="Reordered Cholesky" style="max-width: 100%; height: auto;">
           </div>
@@ -147,30 +202,78 @@
           </p>
 
           <p>
-          Observing that any sparsity or structural property in L is inherited by H, we parameterize the block components of L to fulfill all physical constraints of the robot. We then introduce Floating-Base Deep Lagrangian Networks (FeLaN), which learn one MLP per kinematic chain and a separate MLP for the base, thereby preserving branch-induced sparsity and ensuring full physical consistency of the composite spatial inertia.
+          Observing that any sparsity or structural property in L is inherited by H, we parameterize the block components of L to satisfy all the inertia matrix properties, including branch-induced sparsity and the structural constraints of the composite spatial inertia.
           </p>
-
-          <div class="mb-5" style="text-align: center;">
-            <img src="static/images/felan_full_white_back.png" alt="FeLaN Architecture" style="max-width: 100%; height: auto;">
-          </div>
-
 
         </div>
       </div>
     </div>
   </div>
 </section>
-<!--/ Motivation. -->
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-4">Floating-Base Deep Lagrangian Networks (FeLaN)</h2>
+        <div class="content has-text-justified">
+
+          <p>Using the proposed parametrization, FeLaN assigns one MLP to each kinematic chain, predicting only the corresponding blocks from that branch's joint coordinates. This preserves branch-induced sparsity and enforces functional decoupling between limbs. In addition, a dedicated base MLP takes all joint coordinates to predict the terms associated with the composite spatial inertia, ensuring full physical consistency.</p>
+          <div class="mb-5" style="text-align: center;">
+            <img src="static/images/felan_full_white_back.png" alt="FeLaN Architecture" style="max-width: 100%; height: auto;">
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-4">Verification in Simulated Talos</h2>
+        <div class="content has-text-justified">
+
+          <p>For an initial evaluation in simulation, where the dynamics are mainly governed by rigid-body effects without actuator dynamics, we compare FeLaN with several baselines on system identification for TALOS, including a white-box approach based on a differentiable Recursive Newton–Euler algorithm (DNEA). The figure below shows two rows of plots: the first row reports the estimated vertical base force z and its decomposition into inertial, Coriolis/centrifugal, and gravitational components; the second row shows the same decomposition for the left-arm second joint (LA2). While all grey-box methods fit the total signal well (Fig. 1a), the gravity component of z is stationary only for the white-box baseline (DNEA) and for FeLaN. Among the grey-box approaches, FeLaN is the only method that preserves this property, due to the proposed parametrization.</p>
+          <div class="mb-5" style="text-align: center;">
+            <img src="static/images/sim_talos.png" alt="Simulated Talos results" style="max-width: 100%; height: auto;">
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-4">Verification in real Talos</h2>
+        <div class="content has-text-justified">
+
+          <p>We repeat the experiment on TALOS using real robot data and report results for three representative signals: force z, an arm joint, and a leg joint. Due to real-world effects (e.g., actuator and contact dynamics, friction, measurement noise, state/force estimation errors), DNEA struggles to accurately estimate the torques/forces. In contrast, the grey-box methods achieve better estimation, and FeLaN matches their performance while producing a more interpretable and physically consistent model.</p>
+          <div class="mb-5" style="text-align: center;">
+            <img src="static/images/real_talos.png" alt="Real Talos results" style="max-width: 100%; height: auto;">
+          </div>
+
+          <p>For a complete report of the results, including additional robots and experimental details, please refer to the preprint</p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!--/ Video. -->
 <section class="section">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
-        <h2 class="title is-3">Overall Paper Overview</h2>
+        <h2 class="title is-3">Method Overview Video</h2>
         <div class="content has-text-justified">
-
-          <!-- Video 1 -->
           <div class="publication-video mb-5" style="border-radius: 15px; overflow: hidden; background: #fff;">
             <iframe 
               src="https://www.youtube.com/embed/NTKULQ_GzUQ" 
@@ -179,7 +282,6 @@
               allowfullscreen>
             </iframe>
           </div>
-
         </div>
       </div>
     </div>
