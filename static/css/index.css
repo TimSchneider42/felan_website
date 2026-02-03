@@ -155,3 +155,64 @@ body {
 #interpolation-image-wrapper img {
   border-radius: 5px;
 }
+
+.title {
+  color: #cf233a;
+}
+
+.button.is-dark {
+  background-color: #c21832;
+}
+
+.button.is-dark:hover {
+  background-color: #911a1a;
+}
+
+.section.alt {
+  background: #f7f8fa;
+}
+
+.figure-card{
+  background: #fff;
+  border-radius: 12px;
+  padding: 0.2rem;
+  overflow: hidden; /* important */
+  box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+}
+.figure-card img{
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.tag.is-accent {
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  background: transparent;
+}
+
+#BibTeX .title {
+  color: #cf233a;
+}
+
+.footer {
+    background:  #f7f8fa;
+}
+
+.callout{
+  font-size: 1.1rem;
+  padding: 1rem 1.25rem;                /* bigger card */
+  border-radius: 16px;                  /* rounder */
+  box-shadow: 0 10px 28px rgba(0,0,0,0.06); /* slightly stronger */
+  display: inline-block;                /* so it wraps tight around text */
+}
+
+.callout-accent{
+  color: #cf233a;
+  font-weight: 600;
+}
+
+.status-badge, .callout{
+  transform: scale(1.12);
+  transform-origin: center;
+}

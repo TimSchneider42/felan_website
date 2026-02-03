@@ -88,11 +88,10 @@
           </div>
         </div>
 
-        <div class="is-size-4 column has-text-centered">
-          <p class="is-size-4 has-text-weight-bold has-text-danger">
-          Code and datasets available soon!
-          </p>
-        </div>
+
+    <div class="figure-card callout">
+      <span class="callout-accent">Code & datasets will be released soon.</span>
+    </div>
 
       </div>
     </div>
@@ -100,27 +99,20 @@
 </section>
 
 
-<section class="hero is-light is-small">
-  <div class="hero-body">
-    <div class="container">
-    </div>
-  </div>
-</section>
-
 <!-- Method. -->
-<section class="section">
+<section class="section alt">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
         <h2 class="title is-4">Overview</h2>
         <div class="content has-text-justified">
-          <p>We introduce Floating-Base Deep Lagrangian Networks (FeLaN): a grey-box method for physically consistent system identification of floating-base robots (e.g., humanoids, quadrupeds).</p>
-          <p>Contributions and highlights:</p>
+          <p>We introduce <strong>Floating-Base Deep Lagrangian Networks (FeLaN)</strong>: a grey-box method for physically consistent system identification of floating-base robots (e.g., humanoids, quadrupeds).</p>
+          <p><strong>Contributions:</strong></p>
           <ul>
-           <li>Novel inertia matrix parametrization: preserves branch-induced sparsity and decoupling inherent to multiple kinematic chains, while ensuring full physical consistency of the composite spatial inertia.
-           <li>FeLaN: a deep learning model that combines Lagrangian mechanics with the proposed parametrization, achieving greater interpretability.</li>
-           <li>Evaluation: validated on four real robots (PAL Robotics TALOS, Boston Dynamics Spot, Spot + arm, IIT HyQReal2) and two simulated robots (PAL Robotics TALOS and Unitree Go2).</li>
-           <li>Full physical consistency of the Composite Spatial Inertia: a theoretical extension of the single rigid-body case.</li>
+           <li><strong>Novel inertia matrix parametrization</strong>: preserves <strong>branch-induced sparsity</strong> and decoupling inherent to multiple kinematic chains, while ensuring full physical consistency of the composite spatial inertia.
+           <li><strong>FeLaN</strong>: a deep learning model that combines Lagrangian mechanics with the proposed parametrization, achieving greater interpretability.</li>
+           <li>Evaluation: validated on <strong>four real robots</strong> (Pal Robotics Talos, Boston Dynamics Spot, Spot + arm, IIT HyQReal2) and two simulated robots (Talos and Unitree Go2).</li>
+           <li><strong>Full physical consistency</strong> of the Composite Spatial Inertia: a theoretical extension of the single rigid-body case.</li>
           </ul>
         </div>
       </div>
@@ -137,13 +129,13 @@
         <div class="content has-text-justified">
           <p>Floating-Base systems have specific dynamics properties that are typically not modeled in current grey-box methods:</p>
           <ul>
-            <li>Base is not fixed → its dynamics needs to be considered</li>
-            <li>Multiple kinematic branchs (leg, arms, head) → functional decoupling and branch-induced sparsity</li>
+            <li>Base is not fixed → base motion affects dynamics via composite spatial inertia</li>
+            <li>Multiple kinematic branches (leg, arms, head) → functional decoupling and branch-induced sparsity</li>
           </ul>
           <p>These properties are structural constraints that show up directly in the robot's generalized inertia matrix.</p>
           <p>For example, consider the inertia matrix of the Unitree Go2 quadruped robot:</p>
           <!-- Go2 Inertia -->
-          <div class="mb-5" style="text-align: center;">
+          <div class="figure-card mb-5" style="text-align: center;">
             <img src="static/images/go2_inertia_small.png" alt="FeLaN Architecture" style="max-width: 100%; height: auto;">
           </div>
 
@@ -154,19 +146,19 @@
             <li>A positive definite composite rotational inertia, whose eigenvalues satisfy a triangle inequality</li>
           </ul>
           <!-- Go2 Inertia Composite Spatial Inertia -->
-          <div class="mb-5" style="text-align: center;">
+          <div class="figure-card mb-5" style="text-align: center;">
             <img src="static/images/go2_inertia_composite_inertia_mat_small.png" alt="Inertia Sparsity" style="max-width: 100%; height: auto;">
           </div>
 
           Notice the zeros in each leg's rows, reflecting the partial decoupling between legs.
           <!-- Go2 Inertia Sparsity -->
-          <div class="mb-5" style="text-align: center;">
+          <div class="figure-card mb-5" style="text-align: center;">
             <img src="static/images/go2_inertia_sparsity.png" alt="Inertia Sparsity" style="max-width: 100%; height: auto;">
           </div>
 
           Additionally, each leg's row depends only on its own joint configuration.
           <!-- Go2 Inertia functional -->
-          <div class="mb-5" style="text-align: center;">
+          <div class="figure-card mb-5" style="text-align: center;">
             <img src="static/images/go2_inertia_functional.png" alt="Inertia Functional" style="max-width: 100%; height: auto;">
           </div>
 
@@ -176,7 +168,7 @@
   </div>
 </section>
 
-<section class="section">
+<section class="section alt">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
@@ -218,8 +210,8 @@
         <h2 class="title is-4">Floating-Base Deep Lagrangian Networks (FeLaN)</h2>
         <div class="content has-text-justified">
 
-          <p>Using the proposed parametrization, FeLaN assigns one MLP to each kinematic chain, predicting only the corresponding blocks from that branch's joint coordinates. This preserves branch-induced sparsity and enforces functional decoupling between limbs. In addition, a dedicated base MLP takes all joint coordinates to predict the terms associated with the composite spatial inertia, ensuring full physical consistency.</p>
-          <div class="mb-5" style="text-align: center;">
+          <p>FeLaN employs one MLP for the terms associated with the composite spatial inertia, and one additional MLP per kinematic branch that takes only the corresponding joint coordinates as input. Using our novel parametrization, we construct the factor L, ensuring fully physically consistent spatial inertia while preserving branch-induced sparsity. We then compute the kinetic and potential energies and derive the equations of motion via the Euler-Lagrange equations.</p>
+          <div class="figure-card mb-5" style="text-align: center;">
             <img src="static/images/felan_full_white_back.png" alt="FeLaN Architecture" style="max-width: 100%; height: auto;">
           </div>
 
@@ -229,60 +221,34 @@
   </div>
 </section>
 
-<section class="section">
+<section class="section alt">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
-        <h2 class="title is-4">Verification in Simulated Talos</h2>
+
+        <h2 class="title is-3">Experiments</h2>
+
+        <!-- Subsection: Simulation -->
+        <h3 class="title is-4 mt-6" style="text-align: left;">Simulated Talos</h3>
         <div class="content has-text-justified">
-
-          <p>For an initial evaluation in simulation, where the dynamics are mainly governed by rigid-body effects without actuator dynamics, we compare FeLaN with several baselines on system identification for TALOS, including a white-box approach based on a differentiable Recursive Newton–Euler algorithm (DNEA). The figure below shows two rows of plots: the first row reports the estimated vertical base force z and its decomposition into inertial, Coriolis/centrifugal, and gravitational components; the second row shows the same decomposition for the left-arm second joint (LA2). While all grey-box methods fit the total signal well (Fig. 1a), the gravity component of z is stationary only for the white-box baseline (DNEA) and for FeLaN. Among the grey-box approaches, FeLaN is the only method that preserves this property, due to the proposed parametrization.</p>
-          <div class="mb-5" style="text-align: center;">
-            <img src="static/images/sim_talos.png" alt="Simulated Talos results" style="max-width: 100%; height: auto;">
-          </div>
-
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-4">Verification in real Talos</h2>
-        <div class="content has-text-justified">
-
-          <p>We repeat the experiment on TALOS using real robot data and report results for three representative signals: force z, an arm joint, and a leg joint. Due to real-world effects (e.g., actuator and contact dynamics, friction, measurement noise, state/force estimation errors), DNEA struggles to accurately estimate the torques/forces. In contrast, the grey-box methods achieve better estimation, and FeLaN matches their performance while producing a more interpretable and physically consistent model.</p>
-          <div class="mb-5" style="text-align: center;">
-            <img src="static/images/real_talos.png" alt="Real Talos results" style="max-width: 100%; height: auto;">
-          </div>
-
-          <p>For a complete report of the results, including additional robots and experimental details, please refer to the preprint</p>
-
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!--/ Video. -->
-<section class="section">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Method Overview Video</h2>
-        <div class="content has-text-justified">
-          <div class="publication-video mb-5" style="border-radius: 15px; overflow: hidden; background: #fff;">
-            <iframe 
-              src="https://www.youtube.com/embed/NTKULQ_GzUQ" 
-              frameborder="0" 
-              allow="autoplay; encrypted-media" 
-              allowfullscreen>
-            </iframe>
+          <p>We compare FeLaN with several baselines on system identification for Talos in simulation, including a white-box approach based on a differentiable Recursive Newton-Euler algorithm (DNEA). We show the total signal and its components for the linear force z and the left arm's second joint (LA2).
+          While all grey-box methods fit the total signal well, the gravity component of z is stationary <strong>only</strong> for DNEA and FeLaN, due to the proposed parametrization.</p>
+          <div class="figure-card mb-5">
+            <img src="static/images/sim_talos.png" alt="Simulated Talos results">
           </div>
         </div>
+
+        <!-- Subsection: Real robot -->
+        <h3 class="title is-4 mt-6" style="text-align: left;">Real Talos</h3>
+        <div class="content has-text-justified">
+          <p>Due to real-world effects (e.g., actuator and contact dynamics, friction, measurement noise, state/force estimation errors), DNEA struggles to accurately estimate the torques/forces. In contrast, the grey-box methods achieve better estimation with FeLaN providing a more interpretable and physically consistent model.</p>
+          <div class="figure-card mb-5">
+            <img src="static/images/real_talos.png" alt="Real Talos results">
+          </div>
+
+          <p>For a complete report of the results, including additional robots and experimental details, please refer to the preprint.</p>
+        </div>
+
       </div>
     </div>
   </div>
@@ -352,7 +318,26 @@
   }
 </script>
 
-
+<!--/ Video. -->
+<section class="section alt">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Method Overview Video</h2>
+        <div class="content has-text-justified">
+          <div class="publication-video mb-5" style="border-radius: 15px; overflow: hidden; background: #fff;">
+            <iframe 
+              src="https://www.youtube.com/embed/NTKULQ_GzUQ" 
+              frameborder="0" 
+              allow="autoplay; encrypted-media" 
+              allowfullscreen>
+            </iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- Acknowledgment. -->
 <section class="section">
