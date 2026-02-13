@@ -1,280 +1,288 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
   <meta charset="utf-8">
-  <meta name="description"
-        content="Floating-Base Deep Lagrangian Networks">
-  <meta name="keywords" content="FeLaN">
+  <meta name="description" content="Floating-Base Deep Lagrangian Networks">
+  <meta name="keywords" content="FeLaN, Robotics, Deep Learning, Lagrange, Physics">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>FeLaN</title>
+  <title>FeLaN | Floating-Base Deep Lagrangian Networks</title>
 
-  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
-        rel="stylesheet">
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Outfit:wght@500;700&family=Fira+Code&display=swap"
+    rel="stylesheet">
 
-  <link rel="stylesheet" href="./static/css/bulma.min.css">
-  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
-  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <!-- Icons -->
   <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
-  <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="./static/css/modern.css">
   <link rel="icon" href="./static/images/quadruped_icon.png">
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <!-- JS -->
   <script defer src="./static/js/fontawesome.all.min.js"></script>
-  <script src="./static/js/bulma-carousel.min.js"></script>
-  <script src="./static/js/bulma-slider.min.js"></script>
-  <script src="./static/js/index.js"></script>
+  <script defer src="./static/js/modern.js"></script>
 </head>
+
 <body>
 
-
-<section class="hero">
-  <div class="hero-body">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered">
-        <div class="column has-text-centered">
-          <h1 class="title is-1 publication-title">Floating-Base Deep Lagrangian Networks</h1>
-          <div class="is-size-5 publication-authors">
-            <span class="author-block">
-              <a href="https://www.ias.informatik.tu-darmstadt.de/Team/LucasSchulze">Lucas Schulze</a><sup>1</sup>,</span>
-            <span class="author-block">
-              <a href="https://www.linkedin.com/in/julianodnegri">Juliano Decico Negri</a><sup>2</sup>,</span>
-            <span class="author-block">
-              <a href="https://dls.iit.it/people-details/-/people/victor-barasuol">Victor Barasuol</a><sup>3</sup>,</span>
-            <span class="author-block">
-              <a href="https://www.linkedin.com/in/viviansuzano">Vivian Suzano Medeiros</a><sup>2</sup>,</span>
-            <span class="author-block">
-              <a href="https://www.linkedin.com/in/marcelo-becker-761bb524">Marcelo Becker</a><sup>2</sup>,</span>
-            <span class="author-block">
-              <a href="https://www.ias.informatik.tu-darmstadt.de/Team/JanPeters">Jan Peters</a><sup>1</sup>,</span>
-            <span class="author-block">
-              <a href="https://www.ias.informatik.tu-darmstadt.de/Team/OlegArenz">Oleg Arenz</a><sup>1</sup>
-            </span>
-          </div>
-
-          <div class="is-size-6 publication-authors">
-            <span class="author-block"><sup>1</sup>Intelligent Autonomous Systems Lab, TU Darmstadt, Germany</span><br>
-            <span class="author-block"><sup>2</sup>Mobile Robotics Group, University of São Paulo (EESC-USP), Brazil</span><br>
-            <span class="author-block"><sup>3</sup>Dynamic Legged Systems Lab, Istituto Italiano di Tecnologia (IIT), Italy</span>
-          </div>
-
-          <div class="publication-authors mt-4" style="font-size: 1.05rem;">
-            <p class="has-text-weight-semibold">Accepted to the 2026 IEEE International Conference on Robotics & Automation (ICRA 2026)</p>
-          </div>
-
-          <div class="column has-text-centered">
-            <div class="publication-links">
-              <!-- PDF Link. -->
-              <span class="link-block">
-                <a href="https://arxiv.org/pdf/2510.17270"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fas fa-file-pdf"></i>
-                  </span>
-                  <span>Paper</span>
-                </a>
-              </span>
-              <span class="link-block">
-                <a href="https://arxiv.org/abs/2510.17270"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="ai ai-arxiv"></i>
-                  </span>
-                  <span>arXiv</span>
-                </a>
-              </span>
-
-          </div>
-        </div>
-
-
-    <div class="figure-card callout">
-      <span class="callout-accent">Code & datasets will be released soon.</span>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-bg">
+      <canvas id="hero-canvas"></canvas>
     </div>
+    <div class="hero-content container">
+      <h1 class="title">Floating-Base Deep Lagrangian Networks</h1>
 
+      <div class="authors">
+        <span class="author-block">
+          <a href="https://www.ias.informatik.tu-darmstadt.de/Team/LucasSchulze">Lucas Schulze</a><sup>1</sup>,
+        </span>
+        <span class="author-block">
+          <a href="https://www.linkedin.com/in/julianodnegri">Juliano Decico Negri</a><sup>2</sup>,
+        </span>
+        <span class="author-block">
+          <a href="https://dls.iit.it/people-details/-/people/victor-barasuol">Victor Barasuol</a><sup>3</sup>,
+        </span>
+        <span class="author-block">
+          <a href="https://www.linkedin.com/in/viviansuzano">Vivian Suzano Medeiros</a><sup>2</sup>,
+        </span>
+        <span class="author-block">
+          <a href="https://www.linkedin.com/in/marcelo-becker-761bb524">Marcelo Becker</a><sup>2</sup>,
+        </span>
+        <span class="author-block">
+          <a href="https://www.ias.informatik.tu-darmstadt.de/Team/JanPeters">Jan Peters</a><sup>1</sup>,
+        </span>
+        <span class="author-block">
+          <a href="https://www.ias.informatik.tu-darmstadt.de/Team/OlegArenz">Oleg Arenz</a><sup>1</sup>
+        </span>
+      </div>
+
+      <div class="affiliations">
+        <p><sup>1</sup>Intelligent Autonomous Systems Lab, TU Darmstadt, Germany</p>
+        <p><sup>2</sup>Mobile Robotics Group, University of São Paulo (EESC-USP), Brazil</p>
+        <p><sup>3</sup>Dynamic Legged Systems Lab, Istituto Italiano di Tecnologia (IIT), Italy</p>
+      </div>
+
+      <div class="publication-status" style="margin-bottom: 2rem; color: var(--accent-color); font-weight: 600;">
+        <p>Accepted to the 2026 IEEE International Conference on Robotics & Automation (ICRA 2026)</p>
+      </div>
+
+      <div class="publication-links">
+        <a href="https://arxiv.org/pdf/2510.17270" class="btn">
+          <i class="fas fa-file-pdf"></i> Paper
+        </a>
+        <a href="https://arxiv.org/abs/2510.17270" class="btn">
+          <i class="ai ai-arxiv"></i> arXiv
+        </a>
+      </div>
+
+      <div class="callout reveal">
+        Code & datasets will be released soon.
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-
-<!-- Method. -->
-<section class="section alt">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-4">Overview</h2>
+  <!-- Overview -->
+  <section class="section">
+    <div class="container reveal">
+      <h2 class="section-title">Overview</h2>
+      <div class="card">
         <div class="content has-text-justified">
-          <p>We introduce <strong>Floating-Base Deep Lagrangian Networks (FeLaN)</strong>: a grey-box method for physically consistent system identification of floating-base robots (e.g., humanoids, quadrupeds).</p>
+          <p>We introduce <strong>Floating-Base Deep Lagrangian Networks (FeLaN)</strong>: a grey-box method for
+            physically consistent system identification of floating-base robots (e.g., humanoids, quadrupeds).</p>
+          <br>
           <p><strong>Contributions:</strong></p>
           <ul>
-           <li><strong>Novel inertia matrix parametrization</strong>: preserves <strong>branch-induced sparsity</strong> and decoupling inherent to multiple kinematic chains, while ensuring full physical consistency of the composite spatial inertia.
-           <li><strong>FeLaN</strong>: a deep learning model that combines Lagrangian mechanics with the proposed parametrization, achieving greater interpretability.</li>
-           <li>Evaluation: validated on <strong>four real robots</strong> (Pal Robotics Talos, Boston Dynamics Spot, Spot + arm, IIT HyQReal2) and two simulated robots (Talos and Unitree Go2).</li>
-           <li><strong>Full physical consistency</strong> of the Composite Spatial Inertia: a theoretical extension of the single rigid-body case.</li>
+            <li><strong>Novel inertia matrix parametrization</strong>: preserves <strong>branch-induced
+                sparsity</strong> and decoupling inherent to multiple kinematic chains, while ensuring full physical
+              consistency of the composite spatial inertia.</li>
+            <li><strong>FeLaN</strong>: a deep learning model that combines Lagrangian mechanics with the proposed
+              parametrization, achieving greater interpretability.</li>
+            <li>Evaluation: validated on <strong>four real robots</strong> (Pal Robotics Talos, Boston Dynamics Spot,
+              Spot + arm, IIT HyQReal2) and two simulated robots (Talos and Unitree Go2).</li>
+            <li><strong>Full physical consistency</strong> of the Composite Spatial Inertia: a theoretical extension of
+              the single rigid-body case.</li>
           </ul>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- Method. -->
-<section class="section">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-4">Inertia Matrix Structure</h2>
+  <!-- Inertia Matrix Structure -->
+  <section class="section">
+    <div class="container reveal">
+      <h2 class="section-title">Inertia Matrix Structure</h2>
+      <div class="card">
         <div class="content has-text-justified">
-          <p>Floating-Base systems have specific dynamics properties that are typically not modeled in current grey-box methods:</p>
+          <p>Floating-Base systems have specific dynamics properties that are typically not modeled in current grey-box
+            methods:</p>
           <ul>
             <li>Base is not fixed → base motion affects dynamics via composite spatial inertia</li>
             <li>Multiple kinematic branches (leg, arms, head) → functional decoupling and branch-induced sparsity</li>
           </ul>
-          <p>These properties are structural constraints that show up directly in the robot's generalized inertia matrix.</p>
+          <p>These properties are structural constraints that show up directly in the robot's generalized inertia
+            matrix.</p>
           <p>For example, consider the inertia matrix of the Unitree Go2 quadruped robot:</p>
-          <!-- Go2 Inertia -->
-          <div class="figure-card mb-5" style="text-align: center;">
-            <img src="static/images/go2_inertia_small.png" alt="FeLaN Architecture" style="max-width: 100%; height: auto;">
+
+          <div style="text-align: center; margin: 2rem 0;">
+            <img src="static/images/go2_inertia_small.png" alt="FeLaN Architecture"
+              style="box-shadow: 0 0 20px rgba(56, 189, 248, 0.2);">
           </div>
 
-          The top-left 6x6 block corresponds to the composite spatial inertia matrix and has three properties:
+          <p>The top-left 6x6 block corresponds to the composite spatial inertia matrix and has three properties:</p>
           <ul>
             <li>Stationary total mass</li>
-            <li>A skew-symmetric matrix capturing the coupling between linear and angular coordinates through the first mass moment</li>
+            <li>A skew-symmetric matrix capturing the coupling between linear and angular coordinates through the first
+              mass moment</li>
             <li>A positive definite composite rotational inertia, whose eigenvalues satisfy a triangle inequality</li>
           </ul>
-          <!-- Go2 Inertia Composite Spatial Inertia -->
-          <div class="figure-card mb-5" style="text-align: center;">
-            <img src="static/images/go2_inertia_composite_inertia_mat_small.png" alt="Inertia Sparsity" style="max-width: 100%; height: auto;">
+
+          <div style="text-align: center; margin: 2rem 0;">
+            <img src="static/images/go2_inertia_composite_inertia_mat_small.png" alt="Inertia Sparsity">
           </div>
 
-          Notice the zeros in each leg's rows, reflecting the partial decoupling between legs.
-          <!-- Go2 Inertia Sparsity -->
-          <div class="figure-card mb-5" style="text-align: center;">
-            <img src="static/images/go2_inertia_sparsity.png" alt="Inertia Sparsity" style="max-width: 100%; height: auto;">
+          <p>Notice the zeros in each leg's rows, reflecting the partial decoupling between legs.</p>
+
+          <div style="text-align: center; margin: 2rem 0;">
+            <img src="static/images/go2_inertia_sparsity.png" alt="Inertia Sparsity">
           </div>
 
-          Additionally, each leg's row depends only on its own joint configuration.
-          <!-- Go2 Inertia functional -->
-          <div class="figure-card mb-5" style="text-align: center;">
-            <img src="static/images/go2_inertia_functional.png" alt="Inertia Functional" style="max-width: 100%; height: auto;">
+          <p>Additionally, each leg's row depends only on its own joint configuration.</p>
+
+          <div style="text-align: center; margin: 2rem 0;">
+            <img src="static/images/go2_inertia_functional.png" alt="Inertia Functional">
           </div>
 
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="section alt">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-4">Proposed Parametrization</h2>
+  <!-- Proposed Parametrization -->
+  <section class="section">
+    <div class="container reveal">
+      <h2 class="section-title">Proposed Parametrization</h2>
+      <div class="card">
         <div class="content has-text-justified">
+          <p>A common way to learn a physically valid inertia matrix is to predict a Cholesky factor to guarantees
+            positive definiteness:</p>
 
-          <p>A common way to learn a physically valid inertia matrix is to predict a Cholesky factor to guarantees positive definiteness:</p>
-
-          <!-- Image -->
-          <div class="mb-5" style="text-align: center;">
-            <img src="static/images/default_cholesky.png" alt="Default Cholesky" style="max-width: 100%; height: auto;">
+          <div style="text-align: center; margin: 2rem 0;">
+            <img src="static/images/default_cholesky.png" alt="Default Cholesky" loading="lazy">
           </div>
-          <p>However, standard Cholesky factorization does not preserve sparsity patterns: even if the original matrix is sparse, the resulting factor is generally dense. This not only compromises sparsity for a learning-based model, but also prevents the proper decoupling between kinematic branches.</p>
 
-          <!-- Image -->
-          <p>Featherstone (2005) proposed an efficient factorization of the joint-space inertia matrix using a reordered Cholesky factorization, thereby exploiting branch-induced sparsity:</p>
-          <div class="mb-5" style="text-align: center;">
-            <img src="static/images/reordered_cholesky.png" alt="Reordered Cholesky" style="max-width: 100%; height: auto;">
+          <p>However, standard Cholesky factorization does not preserve sparsity patterns: even if the original matrix
+            is sparse, the resulting factor is generally dense. This not only compromises sparsity for a learning-based
+            model, but also prevents the proper decoupling between kinematic branches.</p>
+
+          <p>Featherstone (2005) proposed an efficient factorization of the joint-space inertia matrix using a reordered
+            Cholesky factorization, thereby exploiting branch-induced sparsity:</p>
+
+          <div style="text-align: center; margin: 2rem 0;">
+            <img src="static/images/reordered_cholesky.png" alt="Reordered Cholesky" loading="lazy">
           </div>
-          <p class="is-size-7 has-text-grey" id="ref-featherstone2005">
-             R. Featherstone, “Efficient factorization of the joint-space inertia matrix for branched kinematic trees,”
+
+          <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 1rem;">
+            R. Featherstone, “Efficient factorization of the joint-space inertia matrix for branched kinematic trees,”
             <em>The International Journal of Robotics Research</em>, vol. 24, no. 6, pp. 487-500, 2005.
           </p>
 
-          <p>
-          Observing that any sparsity or structural property in L is inherited by H, we parameterize the block components of L to satisfy all the inertia matrix properties, including branch-induced sparsity and the structural constraints of the composite spatial inertia.
+          <p style="margin-top: 1rem;">
+            Observing that any sparsity or structural property in L is inherited by H, we parameterize the block
+            components of L to satisfy all the inertia matrix properties, including branch-induced sparsity and the
+            structural constraints of the composite spatial inertia.
           </p>
-
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="section">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-4">Floating-Base Deep Lagrangian Networks (FeLaN)</h2>
+  <!-- FeLaN -->
+  <section class="section">
+    <div class="container reveal">
+      <h2 class="section-title">FeLaN Architecture</h2>
+      <div class="card">
         <div class="content has-text-justified">
-
-          <p>FeLaN employs one MLP for the terms associated with the composite spatial inertia, and one additional MLP per kinematic branch that takes only the corresponding joint coordinates as input. Using our novel parametrization, we construct the factor L, ensuring fully physically consistent spatial inertia while preserving branch-induced sparsity. We then compute the kinetic and potential energies and derive the equations of motion via the Euler-Lagrange equations.</p>
-          <div class="figure-card mb-5" style="text-align: center;">
-            <img src="static/images/felan_full_white_back.png" alt="FeLaN Architecture" style="max-width: 100%; height: auto;">
+          <p>FeLaN employs one MLP for the terms associated with the composite spatial inertia, and one additional MLP
+            per kinematic branch that takes only the corresponding joint coordinates as input. Using our novel
+            parametrization, we construct the factor L, ensuring fully physically consistent spatial inertia while
+            preserving branch-induced sparsity. We then compute the kinetic and potential energies and derive the
+            equations of motion via the Euler-Lagrange equations.</p>
+          <div style="text-align: center; margin: 2rem 0;">
+            <img src="static/images/felan_full_white_back.png" alt="FeLaN Architecture"
+              style="background: rgba(255,255,255,0.9); padding: 10px; border-radius: 8px;">
           </div>
-
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="section alt">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
+  <!-- Experiments -->
+  <section class="section">
+    <div class="container reveal">
+      <h2 class="section-title">Experiments</h2>
 
-        <h2 class="title is-3">Experiments</h2>
-
-        <!-- Subsection: Simulation -->
-        <h3 class="title is-4 mt-6" style="text-align: left;">Simulated Talos</h3>
+      <div class="card">
+        <h3 class="title is-4">Simulated Talos</h3>
         <div class="content has-text-justified">
-          <p>We compare FeLaN with several baselines on system identification for Talos in simulation, including a white-box approach based on a differentiable Recursive Newton-Euler algorithm (DNEA). We show the total signal and its components for the linear force z and the left arm's second joint (LA2).
-          While all grey-box methods fit the total signal well, the gravity component of z is stationary <strong>only</strong> for DNEA and FeLaN, due to the proposed parametrization.</p>
-          <div class="figure-card mb-5">
-            <img src="static/images/sim_talos.png" alt="Simulated Talos results">
+          <p>We compare FeLaN with several baselines on system identification for Talos in simulation, including a
+            white-box approach based on a differentiable Recursive Newton-Euler algorithm (DNEA). We show the total
+            signal and its components for the linear force z and the left arm's second joint (LA2).
+            While all grey-box methods fit the total signal well, the gravity component of z is stationary
+            <strong>only</strong> for DNEA and FeLaN, due to the proposed parametrization.</p>
+          <div style="text-align: center; margin: 2rem 0;">
+            <img src="static/images/sim_talos.png" alt="Simulated Talos results" loading="lazy">
           </div>
         </div>
+      </div>
 
-        <!-- Subsection: Real robot -->
-        <h3 class="title is-4 mt-6" style="text-align: left;">Real Talos</h3>
+      <div class="card">
+        <h3 class="title is-4">Real Talos</h3>
         <div class="content has-text-justified">
-          <p>Due to real-world effects (e.g., actuator and contact dynamics, friction, measurement noise, state/force estimation errors), DNEA struggles to accurately estimate the torques/forces. In contrast, the grey-box methods achieve better estimation with FeLaN providing a more interpretable and physically consistent model.</p>
-          <div class="figure-card mb-5">
-            <img src="static/images/real_talos.png" alt="Real Talos results">
+          <p>Due to real-world effects (e.g., actuator and contact dynamics, friction, measurement noise, state/force
+            estimation errors), DNEA struggles to accurately estimate the torques/forces. In contrast, the grey-box
+            methods achieve better estimation with FeLaN providing a more interpretable and physically consistent model.
+          </p>
+          <div style="text-align: center; margin: 2rem 0;">
+            <img src="static/images/real_talos.png" alt="Real Talos results" loading="lazy">
           </div>
-
-          <p>For a complete report of the results, including additional robots and experimental details, please refer to the preprint.</p>
+          <p>For a complete report of the results, including additional robots and experimental details, please refer to
+            the preprint.</p>
         </div>
+      </div>
 
+    </div>
+  </section>
+
+  <!-- Video -->
+  <section class="section">
+    <div class="container reveal">
+      <h2 class="section-title">Method Overview Video</h2>
+      <div class="card" style="padding: 0; overflow: hidden;">
+        <div style="position: relative; padding-bottom: 56.25%; height: 0;">
+          <iframe src="https://www.youtube.com/embed/NTKULQ_GzUQ"
+            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;"
+            allow="autoplay; encrypted-media" allowfullscreen>
+          </iframe>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- Load Lucide icons -->
-<script src="https://unpkg.com/lucide@latest"></script>
-
-<section class="section" id="BibTeX">
-  <div class="container is-max-desktop content">
-    <!-- Centered Section Title -->
-    <h2 class="title has-text-centered">BibTeX</h2>
-
-    <p>If you find this work useful, please consider citing:</p>
-
-    <!-- BibTeX Block with Copy Button -->
-    <div style="position: relative;">
-      <button 
-        onclick="copyBibtex()" 
-        style="position: absolute; top: 0; right: 0; padding: 0.3em; background: none; border: none; cursor: pointer;"
-        aria-label="Copy BibTeX"
-      >
-        <i data-lucide="copy" style="width: 20px; height: 20px; color: #4a4a4a;"></i>
-      </button>
-
-      <pre><code id="bibtex-code">@misc{schulze2025felan,
+  <!-- BibTeX -->
+  <section class="section" id="BibTeX">
+    <div class="container reveal">
+      <h2 class="section-title">BibTeX</h2>
+      <div style="position: relative;">
+        <button onclick="copyBibtex()"
+          style="position: absolute; top: 1rem; right: 1rem; padding: 0.5rem 1rem; background: var(--primary-color); border: none; border-radius: 4px; color: #0f172a; font-weight: bold; cursor: pointer; transition: all 0.2s;"
+          aria-label="Copy BibTeX">
+          Copy
+        </button>
+        <pre><code id="bibtex-code">@misc{schulze2025felan,
       title={Floating-Base Deep Lagrangian Networks}, 
       author={Lucas Schulze and Juliano Decico Negri and Victor Barasuol and Vivian Suzano Medeiros and Marcelo Becker and Jan Peters and Oleg Arenz},
       year={2025},
@@ -283,100 +291,56 @@
       primaryClass={cs.RO},
       url={https://arxiv.org/abs/2510.17270}, 
 }</code></pre>
+        <p id="copy-status"
+          style="color: var(--primary-color); font-size: 0.9em; display: none; margin-top: 0.5em; text-align: right;">
+          Copied to clipboard ✓
+        </p>
+      </div>
+    </div>
+  </section>
 
-      <!-- Status Message (hidden by default) -->
-      <p id="copy-status" style="color: green; font-size: 0.9em; display: none; margin-top: 0.5em;">
-        Copied to clipboard ✓
+  <!-- Acknowledgments -->
+  <section class="section">
+    <div class="container reveal">
+      <h2 class="section-title">Acknowledgment</h2>
+      <div class="card">
+        <p style="text-align: center;">
+          This project has been funded by the German Federal Ministry of Research, Technology and Space (BMFTR) -
+          Project number 01IS23057B.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>
+        This website is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"
+          style="color: var(--text-color);">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+      </p>
+      <p>
+        Website source adapted from <a href="https://github.com/nerfies/nerfies.github.io"
+          style="color: var(--text-color);">nerfies.github.io</a>.
       </p>
     </div>
-  </div>
-</section>
+  </footer>
 
-<!-- Clipboard Script -->
-<script>
-  // Activate Lucide icons
-  lucide.createIcons();
-
-  // Copy BibTeX handler
-  function copyBibtex() {
-    const code = document.getElementById("bibtex-code").innerText;
-    const status = document.getElementById("copy-status");
-
-    navigator.clipboard.writeText(code).then(() => {
-      status.textContent = "Copied to clipboard ✓";
-      status.style.color = "green";
-      status.style.display = "block";
-
-      setTimeout(() => {
-        status.style.display = "none";
-      }, 2000);
-    }).catch(() => {
-      status.textContent = "Failed to copy.";
-      status.style.color = "red";
-      status.style.display = "block";
-    });
-  }
-</script>
-
-<!--/ Video. -->
-<section class="section alt">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Method Overview Video</h2>
-        <div class="content has-text-justified">
-          <div class="publication-video mb-5" style="border-radius: 15px; overflow: hidden; background: #fff;">
-            <iframe 
-              src="https://www.youtube.com/embed/NTKULQ_GzUQ" 
-              frameborder="0" 
-              allow="autoplay; encrypted-media" 
-              allowfullscreen>
-            </iframe>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Acknowledgment. -->
-<section class="section">
-  <div class="container is-max-desktop">
-
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Acknowledgment</h2>
-        <div class="content has-text-justified">
-          <p>
-            This project has been funded by the German Federal Ministry of Research, Technology and Space (BMFTR) - Project number 01IS23057B.
-          </p>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
-<!--/ Acknowledgment. -->
-
-<footer class="footer">
-  <div class="container">
-    <div class="columns is-centered">
-      <div class="column is-8">
-        <div class="content">
-          <p>
-            This website is licensed under a <a rel="license"
-                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
-            Commons Attribution-ShareAlike 4.0 International License</a>.
-          </p>
-          <p>
-            Website source adapted from <a
-              href="https://github.com/nerfies/nerfies.github.io">nerfies.github.io</a>. We appreciate the original authors' effort.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</footer>
-
+  <!-- Scripts -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    lucide.createIcons();
+    function copyBibtex() {
+      const code = document.getElementById("bibtex-code").innerText;
+      const status = document.getElementById("copy-status");
+      navigator.clipboard.writeText(code).then(() => {
+        status.style.display = "block";
+        setTimeout(() => {
+          status.style.display = "none";
+        }, 2000);
+      });
+    }
+  </script>
 </body>
+
 </html>
